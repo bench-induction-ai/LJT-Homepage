@@ -2,9 +2,6 @@
 permalink: /
 title: "Junteng Liu"
 author_profile: true
-redirect_from:
-  - /about/
-  - /about.html
 ---
 
 I am a first-year PhD candidate at the HKUST NLP Group. My PhD supervisor is Professor Junxian He. I graduated from Shanghai Jiao Tong University (SJTU) in June 2024.
