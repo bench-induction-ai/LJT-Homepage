@@ -4,7 +4,7 @@ site_theme               : "default"
 title                    : "Junteng Liu"
 title_separator          : "-"
 name                     : &name "Junteng Liu"
-description              : &description "Junteng Liu's academic homepage"
+description              : &description "First-year PhD candidate at HKUST NLP Group"
 url                      : "https://bench-induction-ai.github.io"
 baseurl                  : "/LJT-Homepage"
 repository               : "bench-induction-ai/LJT-Homepage"
@@ -130,7 +130,6 @@ social:
   links:
     - "https://github.com/Vicent0205"
     - "https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate"
-    - "https://x.com/junteng88716710"
 
 analytics:
   provider               : "false"
