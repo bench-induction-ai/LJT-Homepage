@@ -31,3 +31,9 @@ jobs:
         run: bundle exec jekyll build --strict_front_matter
         env:
           JEKYLL_ENV: production
+
+      - name: Verify single-page homepage
+        run: |
+          test -f _site/index.html
+          grep -q "SynLogic" _site/index.html
+          test "$(find _site -type f -name '*.html' | wc -l)" -eq 1
