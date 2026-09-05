@@ -34,6 +34,10 @@ jobs:
 
       - name: Verify single-page homepage
         run: |
+          echo "Generated HTML files:"
+          find _site -type f -name '*.html' -print | sort
+          echo "HTML count: $(find _site -type f -name '*.html' | wc -l)"
+          echo "SynLogic matches: $(grep -c 'SynLogic' _site/index.html || true)"
           test -f _site/index.html
           grep -q "SynLogic" _site/index.html
           test "$(find _site -type f -name '*.html' | wc -l)" -eq 1
