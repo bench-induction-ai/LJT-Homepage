@@ -29,10 +29,9 @@ analytics:
 atom_feed:
   hide: true
 
-# Only the homepage is included; sample pages and collections from the template
-# are intentionally excluded.
+# Include the page directory, then exclude every template page except about.md.
 include:
-  - _pages/about.md
+  - _pages
 exclude:
   - .devcontainer
   - .github
