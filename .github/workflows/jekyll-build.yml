@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pages: read
 
 concurrency:
   group: homepage-${{ github.ref }}
@@ -15,6 +16,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.pages.outputs.enabled }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -58,9 +61,21 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      - name: Check whether GitHub Pages is enabled
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Build verified. Deployment skipped because GitHub Pages is not enabled or is unavailable to the workflow token. Enable Settings > Pages > Source: GitHub Actions, then re-run this workflow."
+          fi
 
   deploy:
     needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -71,8 +86,6 @@ jobs:
     steps:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

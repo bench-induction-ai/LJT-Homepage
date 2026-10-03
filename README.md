@@ -19,4 +19,6 @@ The Jekyll build workflow validates that only the About and Publications HTML pa
 
 The project-site configuration uses `https://bench-induction-ai.github.io/LJT-Homepage/`. This is the configured URL, not a claim that deployment has succeeded.
 
-The workflow attempts to configure and deploy GitHub Pages after a successful build. If automatic enablement is unavailable to the workflow token, enable **Settings → Pages → Build and deployment → Source: GitHub Actions**, then re-run the workflow.
+The workflow builds and uploads the site, and deploys it only when GitHub Pages is already enabled. Automatic Pages enablement was blocked by GitHub's workflow-token permissions.
+
+To publish, enable **Settings → Pages → Build and deployment → Source: GitHub Actions**, then run **Actions → Jekyll build → Run workflow**. Future pushes to `master` will also build and deploy when Pages is enabled.
