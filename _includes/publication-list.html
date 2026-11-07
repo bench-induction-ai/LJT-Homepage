@@ -1,0 +1,9 @@
+<ol class="publication-list">
+{% for publication in site.data.publications %}
+  <li>
+    <p><strong>{{ publication.title | escape }}</strong><br>
+    {% for author in publication.authors %}{% if author == site.author.name %}<strong>{{ author | escape }}</strong>{% else %}{{ author | escape }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}<br>
+    <em>{{ publication.venue | escape }}</em>, {{ publication.year }}{% if publication.first_author %} · First author{% endif %}{% if publication.code %}<br>Code: {{ publication.code | escape }}{% endif %}</p>
+  </li>
+{% endfor %}
+</ol>
