@@ -1,0 +1,17 @@
+{% assign publication_years = site.data.publications | group_by: "year" %}
+{% assign year_heading = include.heading | default: "h2" %}
+{% for year_group in publication_years %}
+<{{ year_heading }}>{{ year_group.name }}</{{ year_heading }}>
+<ol class="publication-list">
+  {% for publication in year_group.items %}
+  <li>
+    <p>
+      <strong>{{ publication.title | escape }}</strong><br />
+      {% for author_name in publication.authors %}{% if author_name == site.author.name %}<strong>{{ author_name | escape }}</strong>{% else %}{{ author_name | escape }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}.<br />
+      <em>{{ publication.venue | escape }}</em>, {{ publication.year }}{% if publication.first_author %} · First author{% endif %}.
+      {% if publication.code_repository %}<br />GitHub code repository: <code>{{ publication.code_repository | escape }}</code>.{% elsif publication.code_available %}<br />GitHub code repository available.{% endif %}
+    </p>
+  </li>
+  {% endfor %}
+</ol>
+{% endfor %}
